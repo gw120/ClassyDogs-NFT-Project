@@ -1,7 +1,15 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\nft_generator",
+    "\\nft_generator\\build",
+    "\\nft_generator\\build\\json",
+    "\\nft_generator\\src",
+    "\\smart_contracts",
+    "\\smart_contracts\\contracts",
+    "\\smart_contracts\\scripts",
+    "\\smart_contracts\\test"
   ],
-  "SelectedNode": "\\C:\\Users\\asus\\Source\\Repos\\ClassyDogs-NFT-Project",
+  "SelectedNode": "\\smart_contracts\\scripts\\deploy-nftContract.js",
   "PreviewInSolutionExplorer": false
 }
