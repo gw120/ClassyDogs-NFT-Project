@@ -1,15 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\nft_generator",
-    "\\nft_generator\\build",
+    "\\front-end",
+    "\\front-end\\src",
+    "\\front-end\\src\\ artifacts\\NftContract.sol",
+    "\\front-end\\src\\components",
     "\\nft_generator\\build\\json",
     "\\nft_generator\\src",
-    "\\smart_contracts",
     "\\smart_contracts\\contracts",
     "\\smart_contracts\\scripts",
     "\\smart_contracts\\test"
   ],
-  "SelectedNode": "\\smart_contracts\\scripts\\deploy-nftContract.js",
+  "SelectedNode": "\\front-end\\src\\components\\Roadmap.js",
   "PreviewInSolutionExplorer": false
 }
