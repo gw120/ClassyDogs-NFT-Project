@@ -3,14 +3,8 @@
     "",
     "\\front-end",
     "\\front-end\\src",
-    "\\front-end\\src\\ artifacts\\NftContract.sol",
-    "\\front-end\\src\\components",
-    "\\nft_generator\\build\\json",
-    "\\nft_generator\\src",
-    "\\smart_contracts\\contracts",
-    "\\smart_contracts\\scripts",
-    "\\smart_contracts\\test"
+    "\\front-end\\src\\components"
   ],
-  "SelectedNode": "\\front-end\\src\\components\\Roadmap.js",
+  "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false
 }
