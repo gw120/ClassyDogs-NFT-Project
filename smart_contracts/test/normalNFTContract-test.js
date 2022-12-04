@@ -15,7 +15,6 @@ describe("NftContract.sol", () => {
         contract = await contractFactory.deploy(
             CollectionConfig.tokenName,
             CollectionConfig.tokenSymbol,
-            CollectionConfig.baseMetadataURI,
             getAmountInWei(CollectionConfig.whitelistSale.price),
             CollectionConfig.maxSupply,
             CollectionConfig.whitelistSale.maxMintAmountPerTx,
@@ -30,7 +29,7 @@ describe("NftContract.sol", () => {
         });
 
         it("should have correct initial parameters", async () => {
-            expect(await contract.baseURI()).to.equal(CollectionConfig.baseMetadataURI);
+            expect(await contract.baseURI()).to.equal("");
             expect(await contract.hiddenMetadataUri()).to.equal(CollectionConfig.hiddenMetadataUri);
             expect(await contract.cost()).to.equal(getAmountInWei(CollectionConfig.whitelistSale.price));
             expect(await contract.maxSupply()).to.equal(CollectionConfig.maxSupply);
@@ -96,7 +95,7 @@ describe("NftContract.sol", () => {
 
             expect(await contract.totalSupply()).to.equal(1);
             expect(await contract.addressMintedBalance(user1.address)).to.equal(1);
-            expect(await contract.tokenURI(1)).to.equal("ipfs://__CID__/hidden.json")
+            expect(await contract.tokenURI(1)).to.equal(CollectionConfig.hiddenMetadataUri)
 
             await expect(contract.connect(user2).mint(3, { value: mintCost })).to.be.revertedWith("max mint amount per session exceeded")
             await expect(contract.connect(randomUser).mint(1, { value: mintCost })).to.be.revertedWith("user is not whitelisted")
@@ -115,7 +114,7 @@ describe("NftContract.sol", () => {
 
             expect(await contract.totalSupply()).to.equal(1);
             expect(await contract.addressMintedBalance(owner.address)).to.equal(1);
-            expect(await contract.tokenURI(1)).to.equal("ipfs://__CID__/hidden.json")
+            expect(await contract.tokenURI(1)).to.equal(CollectionConfig.hiddenMetadataUri)
         });
     })
 
@@ -145,7 +144,7 @@ describe("NftContract.sol", () => {
             expect(await contract.totalSupply()).to.equal(3);
             expect(await contract.balanceOf(randomUser.address)).to.equal(3);
             expect(await contract.addressMintedBalance(randomUser.address)).to.equal(3);
-            expect(await contract.tokenURI(1)).to.equal("ipfs://__CID__/hidden.json")
+            expect(await contract.tokenURI(1)).to.equal(CollectionConfig.hiddenMetadataUri)
 
         });
 
@@ -155,7 +154,7 @@ describe("NftContract.sol", () => {
 
             expect(await contract.totalSupply()).to.equal(1);
             expect(await contract.addressMintedBalance(owner.address)).to.equal(1);
-            expect(await contract.tokenURI(1)).to.equal("ipfs://__CID__/hidden.json")
+            expect(await contract.tokenURI(1)).to.equal(CollectionConfig.hiddenMetadataUri)
         });
     })
 
@@ -170,6 +169,7 @@ describe("NftContract.sol", () => {
             )
             // Reveal nfts to public
             await contract.connect(owner).startPublicSale(
+                CollectionConfig.baseMetadataURI,
                 getAmountInWei(CollectionConfig.publicSale.price),
                 CollectionConfig.publicSale.maxMintAmountPerTx,
             )
@@ -189,7 +189,7 @@ describe("NftContract.sol", () => {
             expect(await contract.totalSupply()).to.equal(3);
             expect(await contract.balanceOf(randomUser.address)).to.equal(3);
             expect(await contract.addressMintedBalance(randomUser.address)).to.equal(3);
-            expect(await contract.tokenURI(1)).to.equal("ipfs://testNftURI/1.json")
+            expect(await contract.tokenURI(1)).to.equal(`${CollectionConfig.baseMetadataURI}1.json`)
         });
 
         it("should allow owner to mint", async () => {
@@ -220,7 +220,7 @@ describe("NftContract.sol", () => {
             ]
 
             await expect(contract.connect(randomUser).whitelistUsers(whitelistAddresses)).to.be.revertedWith('Ownable: caller is not the owner');
-            await expect(contract.connect(randomUser).reveal()).to.be.revertedWith('Ownable: caller is not the owner');
+            await expect(contract.connect(randomUser).reveal(CollectionConfig.baseMetadataURI)).to.be.revertedWith('Ownable: caller is not the owner');
             await expect(contract.connect(randomUser).setNftPerAddressLimit(10)).to.be.revertedWith('Ownable: caller is not the owner');
             await expect(contract.connect(randomUser).setCost(getAmountInWei(0.01))).to.be.revertedWith('Ownable: caller is not the owner');
             await expect(contract.connect(randomUser).setMaxMintAmountPerTx(10)).to.be.revertedWith('Ownable: caller is not the owner');
