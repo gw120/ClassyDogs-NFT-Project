@@ -29,13 +29,11 @@ contract NFTNormal is ERC721Enumerable, Ownable {
     constructor(
         string memory _name,
         string memory _symbol,
-        string memory _initBaseURI,
         uint256 _cost,
         uint256 _maxSupply,
         uint256 _maxMintAmountPerTx,
         string memory _hiddenMetadataUri
     ) ERC721(_name, _symbol) {
-        setBaseURI(_initBaseURI);
         setHiddenMetadataUri(_hiddenMetadataUri);
         setCost(_cost);
         setMaxMintAmountPerTx(_maxMintAmountPerTx);
@@ -132,10 +130,12 @@ contract NFTNormal is ERC721Enumerable, Ownable {
         setWhitelistMintEnabled(true);
     }
 
-    function startPresale(uint256 _newCost, uint256 _newmaxMintAmount)
-        public
-        onlyOwner
-    {
+    function startPublicSale(
+        string memory _newBaseURI,
+        uint256 _newCost,
+        uint256 _newmaxMintAmount
+    ) public onlyOwner {
+
         require(!paused && whitelistMintEnabled, "Presale impossible");
         setWhitelistMintEnabled(false);
         setCost(_newCost);
@@ -150,13 +150,15 @@ contract NFTNormal is ERC721Enumerable, Ownable {
             !paused && !whitelistMintEnabled && !revealed,
             "Public sale impossible"
         );
-        reveal();
+        reveal(_newBaseURI);
         setCost(_newCost);
         setMaxMintAmountPerTx(_newmaxMintAmount);
     }
 
-    function reveal() public onlyOwner {
+    function reveal(string memory _newBaseURI) public onlyOwner {
         revealed = true;
+        setBaseURI(_newBaseURI);
+
     }
 
     function setNftPerAddressLimit(uint256 _limit) public onlyOwner {
