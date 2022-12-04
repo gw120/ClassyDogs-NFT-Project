@@ -2,9 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\front-end",
-    "\\front-end\\src",
-    "\\front-end\\src\\components"
+    "\\nft_generator",
+    "\\nft_generator\\src",
+    "\\nft_generator\\utils"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\nft_generator\\src\\config.js",
   "PreviewInSolutionExplorer": false
 }

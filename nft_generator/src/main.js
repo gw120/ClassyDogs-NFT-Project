@@ -4,6 +4,7 @@ const sha1 = require("sha1")
 const { createCanvas, loadImage } = require("canvas");
 const buildDir = `${basePath}/build`;
 const layersDir = `${basePath}/layers`;
+
 const {
     format,
     baseUri,
@@ -68,8 +69,8 @@ const getElements = (path) => {
                 name: cleanName(i),
                 fileName: i,
                 path: `${path}${i}`,
-                // weight: getRarityWeight(i),
-                weight: 10
+                weight: getRarityWeight(i)
+
             }
         })
 }
@@ -204,7 +205,7 @@ const createDna = (_layers) => {
 };
 
 const writeMetaData = (_data) => {
-    fs.writeFileSync(`${buildDir}/json/_metadata.json`, _data);
+    fs.writeFileSync(`${buildDir}/_metadata.json`, _data);
 };
 
 const removeQueryStrings = (_dna = "") => {
