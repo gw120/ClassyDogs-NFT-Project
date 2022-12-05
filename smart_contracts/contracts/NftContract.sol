@@ -43,12 +43,14 @@ contract NFTNormal is ERC721Enumerable, Ownable {
     // public
     function mint(uint256 _mintAmount) public payable {
         require(!paused, "the contract is paused");
-        uint256 supply = totalSupply();
-        require(_mintAmount > 0, "need to mint at least 1 NFT");
+        require(_mintAmount != 0, "need to mint at least 1 NFT");
+
         require(
             _mintAmount <= maxMintAmountPerTx,
             "max mint amount per session exceeded"
         );
+       
+        uint256 supply = totalSupply();
         require(supply + _mintAmount <= maxSupply, "max NFT limit exceeded");
 
         if (msg.sender != owner()) {
@@ -63,17 +65,23 @@ contract NFTNormal is ERC721Enumerable, Ownable {
             require(msg.value >= cost * _mintAmount, "insufficient funds");
         }
 
-        for (uint256 i = 1; i <= _mintAmount; i++) {
+        for (uint256 i = 1; i <= _mintAmount; ) {
             addressMintedBalance[msg.sender]++;
             _safeMint(msg.sender, supply + i);
+               unchecked {
+                ++i;
+            }
         }
     }
 
     function isWhitelisted(address _user) public view returns (bool) {
         uint256 whitelistedCount = whitelistedAddresses.length;
-        for (uint256 i = 0; i < whitelistedCount; i++) {
+        for (uint256 i; i < whitelistedCount; ) {
             if (whitelistedAddresses[i] == _user) {
                 return true;
+            }
+             unchecked {
+                ++i;
             }
         }
         return false;
@@ -86,9 +94,12 @@ contract NFTNormal is ERC721Enumerable, Ownable {
     {
         uint256 ownerTokenCount = balanceOf(_owner);
         uint256[] memory tokenIds = new uint256[](ownerTokenCount);
-        for (uint256 i; i < ownerTokenCount; i++) {
+        for (uint256 i; i < ownerTokenCount; ) {
             tokenIds[i] = tokenOfOwnerByIndex(_owner, i);
-        }
+     unchecked {
+                ++i;
+            }
+    }
         return tokenIds;
     }
 
@@ -124,7 +135,7 @@ contract NFTNormal is ERC721Enumerable, Ownable {
     //only owner
 
     
-    function startWhitelisting() public onlyOwner {
+    function startWhitelisting() external payable onlyOwner {
         require(paused && !whitelistMintEnabled, "whitelisting impossible");
         pause(false);
         setWhitelistMintEnabled(true);
@@ -143,7 +154,8 @@ contract NFTNormal is ERC721Enumerable, Ownable {
     }
 
     function startPublicSale(uint256 _newCost, uint256 _newmaxMintAmount)
-        public
+        external
+        payable
         onlyOwner
     {
         require(
@@ -155,30 +167,35 @@ contract NFTNormal is ERC721Enumerable, Ownable {
         setMaxMintAmountPerTx(_newmaxMintAmount);
     }
 
-    function reveal(string memory _newBaseURI) public onlyOwner {
+    function reveal(string memory _newBaseURI) public payable onlyOwner {
         revealed = true;
         setBaseURI(_newBaseURI);
 
     }
 
-    function setNftPerAddressLimit(uint256 _limit) public onlyOwner {
+    function setNftPerAddressLimit(uint256 _limit) public payable onlyOwner {
         nftPerAddressLimit = _limit;
     }
 
-    function setCost(uint256 _newCost) public onlyOwner {
+    function setCost(uint256 _newCost) public payable onlyOwner {
         cost = _newCost;
     }
 
-    function setMaxMintAmountPerTx(uint256 _newmaxMintAmount) public onlyOwner {
-        maxMintAmountPerTx = _newmaxMintAmount;
+    function setMaxMintAmountPerTx(uint256 _newmaxMintAmount)
+        public
+        payable
+        onlyOwner
+    {
+    maxMintAmountPerTx = _newmaxMintAmount;
     }
 
-    function setBaseURI(string memory _newBaseURI) public onlyOwner {
+    function setBaseURI(string memory _newBaseURI) public payable onlyOwner {
         baseURI = _newBaseURI;
     }
 
     function setBaseExtension(string memory _newBaseExtension)
         public
+        payable
         onlyOwner
     {
         baseExtension = _newBaseExtension;
@@ -186,21 +203,27 @@ contract NFTNormal is ERC721Enumerable, Ownable {
 
     function setHiddenMetadataUri(string memory _hiddenMetadataUri)
         public
+        payable
         onlyOwner
     {
         hiddenMetadataUri = _hiddenMetadataUri;
     }
 
-    function pause(bool _state) public onlyOwner {
+    function pause(bool _state) public payable onlyOwner {
         paused = _state;
     }
 
-    function setWhitelistMintEnabled(bool _state) public onlyOwner {
+    function setWhitelistMintEnabled(bool _state) public payable onlyOwner {
         whitelistMintEnabled = _state;
     }
 
-    function whitelistUsers(address[] calldata _users) public onlyOwner {
-        delete whitelistedAddresses;
+   function whitelistUsers(address[] calldata _users)
+        public
+        payable
+        onlyOwner
+    {
+    
+       delete whitelistedAddresses;
         whitelistedAddresses = _users;
     }
 
