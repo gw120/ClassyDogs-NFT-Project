@@ -2,12 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\front-end",
-    "\\front-end\\src",
-    "\\front-end\\src\\pages",
-    "\\nft_generator\\src",
-    "\\nft_generator\\utils",
+    "\\front-end\\src\\utils",
+    "\\smart_contracts",
+    "\\smart_contracts\\contracts",
     "\\smart_contracts\\test"
   ],
-  "SelectedNode": "\\front-end\\src\\pages\\OwnerDashboard.js",
+  "SelectedNode": "\\smart_contracts\\contracts\\NftContract.sol",
   "PreviewInSolutionExplorer": false
 }

@@ -27,7 +27,7 @@ function TypeWriterText() {
                     }}
                 />
             </Title>
-            <SubTitle>Bored of the Katies? try Somthing new.</SubTitle>
+            <SubTitle>Bored of the Kitties? try Somthing new.</SubTitle>
             <ButtonContainer>
                 <Button className='bt-linear'
                     variant="contained"
@@ -62,6 +62,18 @@ const Title = styled.h2`
     .text-1 {
         color: #f82167;
     }
+
+
+@media(max - width: 70em) {
+    font - size: 30px;
+}
+@media(max - width: 48em) {
+    align - self: center;
+    text - align: center;
+}
+@media(max - width: 40em) {
+    width: 90 %;
+}
 `
 const SubTitle = styled.h3`
     font-size: 18px;
@@ -72,10 +84,27 @@ const SubTitle = styled.h3`
     margin-bottom: 1rem;
     width: 80%;
     align-self: flex-start;
+  @media (max-width: 40em){
+        font-size: 16px;
+    }
+    @media (max-width: 48em){
+        align-self: center;
+        text-align: center;
+    }
+
 `
 
 const ButtonContainer = styled.div`
     width: 80%;
     align-self: flex-start;
     text-align: center;
-    padding-top: 20px;
+padding - top: 20px;
+
+@media(max - width: 48em) {
+    align - self: center;
+    text - align: center;
+        button {
+        margin: 0 auto;
+    }
+}
+`
