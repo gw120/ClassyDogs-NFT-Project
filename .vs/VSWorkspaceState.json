@@ -2,11 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\front-end",
+    "\\front-end\\src",
+    "\\front-end\\src\\assets",
+    "\\front-end\\src\\assets\\css",
     "\\front-end\\src\\utils",
     "\\smart_contracts",
-    "\\smart_contracts\\contracts",
     "\\smart_contracts\\test"
   ],
-  "SelectedNode": "\\smart_contracts\\contracts\\NftContract.sol",
+  "SelectedNode": "\\front-end\\src\\assets\\css\\styles.css",
   "PreviewInSolutionExplorer": false
 }

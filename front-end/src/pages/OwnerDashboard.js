@@ -189,20 +189,18 @@ function OwnerDashboard() {
 
 
     return (
-        <div className="home" >
+        <div className="dashboard" >
             <NavBar />
-            <div className="mint-section">
+            <div className="dashboard-section">
                 <h1>Owner Dashboard</h1>
-                <div className="mint-container">
+                <div className="dashboard-container">
                     {mintingState.paused ? (
-          
-            <div className="container"
-              style={{ textAlign: "left", display: "grid", justifyContent: "center", alignItems: "center", paddingTop: "4rem", paddingBottom: "4rem", paddingLeft: "20%", color: "#fff" }}>
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+              <div className="dashboard-content">
+                  <div className='dashboard-row' >
+                  <div className='dashboard-left'>
                   <label>Current contract balance : {mintingState.balance} ETH</label>
                 </div>
-                <div style={{ paddingLeft: "10px" }}>
+                 <div className='dashboard-button-up'>
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -212,15 +210,15 @@ function OwnerDashboard() {
                 </div>
               </div>
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+            <div className='dashboard-row'>
+             <div className='dashboard-left'>
                   <label>Max Nft minted per transaction : </label>
                   <Form.Control type="Number"
                     value={mintingState.maxMintAmountPerTx}
                     onChange={(e) => setMintingState({ ...mintingState, maxMintAmountPerTx: e.target.value })}
                   />
                 </div>
-                <div style={{ paddingLeft: "10px", paddingTop: "25px" }} >
+                 <div className='dashboard-button' >
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -238,7 +236,7 @@ function OwnerDashboard() {
                     onChange={(e) => setMintingState({ ...mintingState, mintCost: e.target.value })}
                   />
                 </div>
-                <div style={{ paddingLeft: "10px", paddingTop: "25px" }} >
+                 <div className='dashboard-button' >
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -249,11 +247,11 @@ function OwnerDashboard() {
               </div>
               <br />
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+             <div className='dashboard-row'>
+              <div className='dashboard-left'>
                   <label>Nft Contract is paused </label>
                 </div>
-                <div style={{ paddingLeft: "10px" }}>
+                <div className='dashboard-button-up'>
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -263,15 +261,13 @@ function OwnerDashboard() {
                 </div>
               </div>
             </div>
-                    ) : mintingState.whitelisting ? (
-          
-            <div className="container"
-              style={{ textAlign: "left", display: "grid", justifyContent: "center", alignItems: "center", paddingTop: "4rem", paddingBottom: "4rem", paddingLeft: "20%", color: "#fff" }}>
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+            ) : mintingState.whitelisting ? (
+            <div className="dashboard-content">
+             <div className='dashboard-row'>
+               <div className='dashboard-left'>
                   <label>Current contract balance : {mintingState.balance} ETH</label>
                 </div>
-                <div style={{ paddingLeft: "10px" }}>
+                  <div className='dashboard-button-up'>
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -281,16 +277,15 @@ function OwnerDashboard() {
                 </div>
               </div>
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-
-                <div style={{ width: "400px" }}>
+             <div className='dashboard-row'>
+              <div className='dashboard-left'>
                   <label>Max Nft minted per transaction : </label>
                   <Form.Control type="Number"
                     value={mintingState.maxMintAmountPerTx}
                     onChange={(e) => setMintingState({ ...mintingState, maxMintAmountPerTx: e.target.value })}
                   />
                 </div>
-                <div style={{ paddingLeft: "10px", paddingTop: "25px" }} >
+                  <div className='dashboard-button' >
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -300,15 +295,15 @@ function OwnerDashboard() {
                 </div>
               </div>
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+            <div className='dashboard-row'>
+              <div className='dashboard-left'>
                   <label>NFT mint cost (ETH) : </label>
                   <Form.Control type="Number"
                     value={mintingState.mintCost}
                     onChange={(e) => setMintingState({ ...mintingState, mintCost: e.target.value })}
                   />
                 </div>
-                <div style={{ paddingLeft: "10px", paddingTop: "25px" }} >
+                 <div className='dashboard-button' >
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -319,11 +314,11 @@ function OwnerDashboard() {
               </div>
               <br />
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+            <div className='dashboard-row'>
+               <div className='dashboard-left'>
                   <label>Nft Contract is in whitelisting state </label>
                 </div>
-                <div style={{ paddingLeft: "10px" }}>
+                 <div className='dashboard-button-up'>
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -334,14 +329,12 @@ function OwnerDashboard() {
               </div>
             </div>
                     ) : mintingState.presale ? (
-        
-            <div className="container"
-              style={{ textAlign: "left", display: "grid", justifyContent: "center", alignItems: "center", paddingTop: "4rem", paddingBottom: "4rem", paddingLeft: "20%", color: "#fff" }}>
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+              <div className="dashboard-content">
+              <div className='dashboard-row'>
+              <div className='dashboard-left'>
                   <label>Current contract balance : {mintingState.balance} ETH</label>
                 </div>
-                <div style={{ paddingLeft: "10px" }}>
+              <div className='dashboard-button-up'>
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -351,16 +344,15 @@ function OwnerDashboard() {
                 </div>
               </div>
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-
-                <div style={{ width: "400px" }}>
+              <div className='dashboard-row'>
+                  <div className='dashboard-left'>
                   <label>Max Nft minted per transaction : </label>
                   <Form.Control type="Number"
                     value={mintingState.maxMintAmountPerTx}
                     onChange={(e) => setMintingState({ ...mintingState, maxMintAmountPerTx: e.target.value })}
                   />
                 </div>
-                <div style={{ paddingLeft: "10px", paddingTop: "25px" }} >
+                  <div className='dashboard-button' >
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -370,15 +362,15 @@ function OwnerDashboard() {
                 </div>
               </div>
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+               <div className='dashboard-row'>
+               <div className='dashboard-left'>
                   <label>NFT mint cost (ETH) : </label>
                   <Form.Control type="Number"
                     value={mintingState.mintCost}
                     onChange={(e) => setMintingState({ ...mintingState, mintCost: e.target.value })}
                   />
                 </div>
-                <div style={{ paddingLeft: "10px", paddingTop: "25px" }} >
+                <div className='dashboard-button' >
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -389,11 +381,11 @@ function OwnerDashboard() {
               </div>
               <br />
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+               <div className='dashboard-row'>
+               <div className='dashboard-left'>
                   <label>Nft Contract is in presale mode </label>
                 </div>
-                <div style={{ paddingLeft: "10px" }}>
+                  <div className='da'>
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -404,13 +396,12 @@ function OwnerDashboard() {
               </div>
             </div>
                     ) : (
-            <div className="container"
-              style={{ textAlign: "left", display: "grid", justifyContent: "center", alignItems: "center", paddingTop: "4rem", paddingBottom: "4rem", paddingLeft: "20%", color: "#fff" }}>
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+        <div className="dashboard-content">
+         <div className='dashboard-row'>
+         <div className='dashboard-left'>
                   <label>Current contract balance : {mintingState.balance} ETH</label>
                 </div>
-                <div style={{ paddingLeft: "10px" }}>
+                   <div className='dashboard-button-up'>
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -420,16 +411,15 @@ function OwnerDashboard() {
                 </div>
               </div>
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-
-                <div style={{ width: "400px" }}>
+               <div className='dashboard-row'>
+                <div className='dashboard-left'>
                   <label>Max Nft minted per transaction : </label>
                   <Form.Control type="Number"
                     value={mintingState.maxMintAmountPerTx}
                     onChange={(e) => setMintingState({ ...mintingState, maxMintAmountPerTx: e.target.value })}
                   />
                 </div>
-                <div style={{ paddingLeft: "10px", paddingTop: "25px" }} >
+                 <div className='dashboard-button' >
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
@@ -439,15 +429,15 @@ function OwnerDashboard() {
                 </div>
               </div>
               <br />
-              <div style={{ width: "700px", display: "flex" }}>
-                <div style={{ width: "400px" }}>
+               <div className='dashboard-row'>
+               <div className='dashboard-left'>
                   <label>NFT mint cost (ETH) : </label>
                   <Form.Control type="Number"
                     value={mintingState.mintCost}
                     onChange={(e) => setMintingState({ ...mintingState, mintCost: e.target.value })}
                   />
                 </div>
-                <div style={{ paddingLeft: "10px", paddingTop: "25px" }} >
+                   <div className='dashboard-button' >
                   <Button className='bt-linear'
                     variant="contained"
                     color="primary"
