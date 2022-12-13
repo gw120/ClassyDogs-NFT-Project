@@ -5,10 +5,11 @@
     "\\front-end\\src",
     "\\front-end\\src\\assets",
     "\\front-end\\src\\assets\\css",
+    "\\front-end\\src\\pages",
     "\\front-end\\src\\utils",
     "\\smart_contracts",
     "\\smart_contracts\\test"
   ],
-  "SelectedNode": "\\front-end\\src\\assets\\css\\styles.css",
+  "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false
 }
