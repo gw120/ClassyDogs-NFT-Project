@@ -140,13 +140,12 @@ Then in the config folder you'll find the collection config file where you must 
         maxMintAmountPerTx: 5,
     },
    ```
+
 After going through all the configuration step, you'll need to deploy the smart contract to the ganache network by running: 
    ```sh
-   cd hardhat
    yarn deploy --network ganache
    ```
 This will create a config.js file and an artifacts folder and transfer them to the src folder to enable the interaction between the contract and the UI
-
 * <b>IMPORTANT :</b> I used the ganache network for development purposes only, you can choose another testnet or real network if you want, for that you need to add it to the hardhat.config file for example for the rinkeby testnet  
    ```sh
    rinkeby: {
@@ -155,13 +154,11 @@ This will create a config.js file and an artifacts folder and transfer them to t
       chainId: 4,
     }
    ```
-
 If you want to test the functionnalities of the NFT contract you can do it by running:
    ```sh
    yarn test
    ```
 ### Front end
-
 To start the user interface just run the following commands :
    ```sh
    cd front-end

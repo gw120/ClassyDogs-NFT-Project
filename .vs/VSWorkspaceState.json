@@ -3,11 +3,10 @@
     "",
     "\\front-end",
     "\\front-end\\src",
-    "\\front-end\\src\\assets",
-    "\\front-end\\src\\assets\\css",
+    "\\front-end\\src\\components",
     "\\front-end\\src\\utils",
     "\\smart_contracts"
   ],
-  "SelectedNode": "\\front-end\\src\\assets\\css\\styles.css",
+  "SelectedNode": "\\front-end\\src\\components\\Mint.js",
   "PreviewInSolutionExplorer": false
 }
