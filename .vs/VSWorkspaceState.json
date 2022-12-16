@@ -2,13 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\front-end",
+    "\\front-end\\src",
+    "\\front-end\\src\\assets",
     "\\front-end\\src\\assets\\css",
-    "\\front-end\\src\\components",
-    "\\front-end\\src\\pages",
     "\\front-end\\src\\utils",
-    "\\smart_contracts",
-    "\\smart_contracts\\contracts"
+    "\\smart_contracts"
   ],
-  "SelectedNode": "\\smart_contracts\\contracts\\NFTStakingVault.sol",
+  "SelectedNode": "\\front-end\\src\\assets\\css\\styles.css",
   "PreviewInSolutionExplorer": false
 }
