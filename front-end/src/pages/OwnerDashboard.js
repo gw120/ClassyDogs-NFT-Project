@@ -96,16 +96,22 @@ function OwnerDashboard() {
     const startWhitelisting = async () => {
         if (data.network === networksMap[networkDeployedTo] && mintingState.paused) {
             if (!mintingState.whitelisting) {
+
                 try {
                     setLoading(true)
                     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
                     const signer = provider.getSigner()
                     const nft_contract = new ethers.Contract(contractAddress, nftContract.abi, signer);
+
                     console.log("starting whitelist sale")
-                    const whitelist_tx = await nft_contract.startWhitelisting()
-                    await whitelist_tx.wait()
+
+                    const unpause_tx = await nft_contract.pause(false)
+                    await unpause_tx.wait()
+
+                    const whitelist_tx = await nft_contract.setWhitelistMintEnabled(true)                    await whitelist_tx.wait()
                     setLoading(false)
                     getMintingState()
+
                 } catch (error) {
                     setLoading(false)
                     window.alert("An error has occured, Please Try Again")
@@ -123,11 +129,16 @@ function OwnerDashboard() {
                 const nft_contract = new ethers.Contract(contractAddress, nftContract.abi, signer);
                 let newCost = ethers.utils.parseEther(CollectionConfig.preSale.price.toString(), "ether")
                 let maxMintAmount = CollectionConfig.preSale.maxMintAmountPerTx
-                const presale_tx = await nft_contract.startPresale(
-                    newCost,
-                    maxMintAmount
-                )
+                const stop_whitelist_tx = await nft_contract.setWhitelistMintEnabled(false)
+                await stop_whitelist_tx.wait()
+
+                const set_tx = await nft_contract.setCost(newCost)
+                await set_tx.wait()
+
+                const set_tx2 = await nft_contract.setMaxMintAmountPerTx(maxMintAmount)
+                await set_tx2.wait()
                 await presale_tx.wait()
+
                 setLoading(false)
                 getMintingState()
             } catch (error) {
@@ -139,6 +150,7 @@ function OwnerDashboard() {
     }
     const startPublicSale = async () => {
         if (data.network === networksMap[networkDeployedTo] && mintingState.presale) {
+
             try {
                 setLoading(true)
                 const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
@@ -146,12 +158,15 @@ function OwnerDashboard() {
                 const nft_contract = new ethers.Contract(contractAddress, nftContract.abi, signer);
                 let newCost = ethers.utils.parseEther(CollectionConfig.publicSale.price.toString(), "ether")
                 let maxMintAmount = CollectionConfig.publicSale.maxMintAmountPerTx
-                const publicSale_tx = await nft_contract.startPublicSale(
-                    CollectionConfig.baseMetadataURI,
-                    newCost,
-                    maxMintAmount
-                )
-                await publicSale_tx.wait()
+                const reveal_tx = await nft_contract.reveal(CollectionConfig.baseMetadataURI)
+                await reveal_tx.wait()
+
+                const set_tx = await nft_contract.setCost(newCost)
+                await set_tx.wait()
+
+                const set_tx2 = await nft_contract.setMaxMintAmountPerTx(maxMintAmount)
+                await set_tx2.wait()
+
                 setLoading(false)
                 getMintingState()
             } catch (error) {
@@ -223,7 +238,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={changeMaxMintAmount}>
-                    {loading ? <CircularProgress color="inherit" /> : "Change"}
+                     {loading ? <CircularProgress color="inherit" size={18} /> : "withdraw"}
                   </Button>
                 </div>
               </div>
@@ -241,7 +256,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={changeMintCost}>
-                    {loading ? <CircularProgress color="inherit" /> : "Change"}
+                    {loading ? <CircularProgress color="inherit" size={18} /> : "Change"}
                   </Button>
                 </div>
               </div>
@@ -256,7 +271,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={startWhitelisting}>
-                    {loading ? <CircularProgress color="inherit" /> : "Start Whitelisting"}
+                  {loading ? <CircularProgress color="inherit" size={18} /> : "Change"}
                   </Button>
                 </div>
               </div>
@@ -272,7 +287,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={withdraw}>
-                    {loading ? <CircularProgress color="inherit" /> : "withdraw"}
+                     {loading ? <CircularProgress color="inherit" size={18} /> : "Start Whitelisting"}
                   </Button>
                 </div>
               </div>
@@ -290,7 +305,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={changeMaxMintAmount}>
-                    {loading ? <CircularProgress color="inherit" /> : "Change"}
+                    {loading ? <CircularProgress color="inherit" size={18} /> : "withdraw"}
                   </Button>
                 </div>
               </div>
@@ -308,7 +323,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={changeMintCost}>
-                    {loading ? <CircularProgress color="inherit" /> : "Change"}
+                    {loading ? <CircularProgress color="inherit" size={18} /> : "Change"}
                   </Button>
                 </div>
               </div>
@@ -323,7 +338,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={startPresale}>
-                    {loading ? <CircularProgress color="inherit" /> : "Start Presale"}
+                {loading ? <CircularProgress color="inherit" size={18} /> : "Change"}
                   </Button>
                 </div>
               </div>
@@ -339,7 +354,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={withdraw}>
-                    {loading ? <CircularProgress color="inherit" /> : "withdraw"}
+                      {loading ? <CircularProgress color="inherit" size={18} /> : "Start Presale"}
                   </Button>
                 </div>
               </div>
@@ -357,7 +372,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={changeMaxMintAmount}>
-                    {loading ? <CircularProgress color="inherit" /> : "Change"}
+                   {loading ? <CircularProgress color="inherit" size={18} /> : "withdraw"}
                   </Button>
                 </div>
               </div>
@@ -375,7 +390,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={changeMintCost}>
-                    {loading ? <CircularProgress color="inherit" /> : "Change"}
+                                  {loading ? <CircularProgress color="inherit" size={18} /> : "Change"}
                   </Button>
                 </div>
               </div>
@@ -390,7 +405,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={startPublicSale}>
-                    {loading ? <CircularProgress color="inherit" /> : "Start PublicSale"}
+              {loading ? <CircularProgress color="inherit" size={18} /> : "Change"}
                   </Button>
                 </div>
               </div>
@@ -406,7 +421,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={withdraw}>
-                    {loading ? <CircularProgress color="inherit" /> : "withdraw"}
+                      {loading ? <CircularProgress color="inherit" size={18} /> : "Start PublicSale"}
                   </Button>
                 </div>
               </div>
@@ -424,7 +439,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={changeMaxMintAmount}>
-                    {loading ? <CircularProgress color="inherit" /> : "Change"}
+                      {loading ? <CircularProgress color="inherit" size={18} /> : "Change"}
                   </Button>
                 </div>
               </div>
@@ -442,7 +457,7 @@ function OwnerDashboard() {
                     variant="contained"
                     color="primary"
                     onClick={changeMintCost}>
-                    {loading ? <CircularProgress color="inherit" /> : "Change"}
+                         {loading ? <CircularProgress color="inherit" size={18} /> : "Change"}
                   </Button>
                 </div>
               </div>
