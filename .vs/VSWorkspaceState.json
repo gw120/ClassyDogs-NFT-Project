@@ -2,11 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\front-end",
-    "\\front-end\\src",
     "\\front-end\\src\\components",
     "\\front-end\\src\\utils",
-    "\\smart_contracts"
+    "\\smart_contracts",
+    "\\smart_contracts\\contracts",
+    "\\smart_contracts\\test"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\smart_contracts\\test\\normalNFTContract-test.js",
   "PreviewInSolutionExplorer": false
 }
