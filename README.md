@@ -88,7 +88,7 @@ Please install or have installed the following:
 ### Art generation
 After installing node open a terminal in your code editor (VS Code for example) and clone this repository :
    ```sh
-   git clone https://github.com/Aymen1001/Complete-NFT-Project.git
+   git clone https://github.com/gw120/Complete-NFT-Project.git
    ```
 Then install the art engine dependancies by running :
    ```sh
