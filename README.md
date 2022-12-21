@@ -226,7 +226,7 @@ If you want to learn more about NFT projects, these great tutorials may help:
 <!-- Contact -->
 ## Contact
 
-If you have any question or problem running this project just contact me: aymenMir1001@gmail.com
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
